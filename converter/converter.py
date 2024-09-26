@@ -1,10 +1,23 @@
 from os import listdir
 import re
 import csv
+import pyi_splash
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 import pandas as pd
 
+def list_xls(dirpath):
+    """
+    A function to list Excel files (.xsl and .xlsx) in a directory
+    :param dirpath: str
+        the path of the directory for which Excel files should be listed.
+    :return: list
+        filenames of xls and xlsx files within the specified directory.
+    """
+    files = listdir(dirpath)
+    files_xls = [i for i in files if (i.endswith('.xls') or i.endswith('.xlsx'))]
+
+    return files_xls
 
 def read_content(filepath, sheet, start_row, end_row, start_column, end_column):
     """
@@ -56,6 +69,19 @@ def convert_to_csv(values, filepath):
                   sep =';',
                   encoding="utf-8")
 
+def clean_names(filenames):
+    """
+    A function for removing non-alphanumerical characters from filenames
+    :param filenames: list
+        A list of filenames, each provided as a string.
+    :return: list
+        A list of filenames without non-alphanumerical characters and file extension.
+    """
+    cleaned_names = [re.sub('[^0-9a-zA-Z_]+', '', i.rsplit('.', 1)[0]) for i in filenames]
+
+    return cleaned_names
+
+
 
 def main():
     """
@@ -72,16 +98,15 @@ def main():
                                mustexist=True)
     if path_xls:
         # read the filenames in the selected folder.
-        files = listdir(path_xls)
-        files_xls = [i for i in files if (i.endswith('.xls') or i.endswith('.xlsx'))]
+        files_xls = list_xls(path_xls)
         fullpath_xls = [path_xls + "/" + i for i in files_xls]
         files_n = len(files_xls)
 
         # dialog box with the number of xls and xlsx files found in the selected folder
         if files_n >= 1:
             res = mb.askquestion('File Excel trovati',
-                                 'Ho trovato ' + str(files_n) + ' file Excel.\n'
-                                 'Vuoi procedere alla conversione in file csv?')
+                                 f'Ho trovato {files_n} file Excel.\n'
+                                 f'Vuoi procedere alla conversione in file csv?')
 
             # select the folder for the converted csv files
             if res == 'yes':
@@ -90,7 +115,7 @@ def main():
 
                 if path_csv:
                     # removing non-alphanumerical characters (except underscore) from filenames
-                    files_csv = [re.sub('[^0-9a-zA-Z_]+', '', i.rsplit('.', 1)[0]) for i in files_xls]
+                    files_csv = clean_names(files_xls)
                     fullpath_csv = [path_csv + "/" + i + ".csv" for i in files_csv]
 
                     content_csv = []
@@ -116,16 +141,15 @@ def main():
 
                     # recap message
                     if missing_sheet != 0:
-                        warning_msg = '\n' + 'In ' + str(missing_sheet) + ' file mancava la scheda ' + mysheet + '.'
+                        warning_msg = f'\n In {missing_sheet} file mancava la scheda {mysheet}.'
                     else:
                         warning_msg = ''
 
                     mb.showinfo('File convertiti',
-                                'Sono stati convertiti ' + str(files_n - missing_sheet) + ' file Excel.\n'
-                                'I file csv sono stati salvati nella cartella ' +
-                                path_csv + '.\n'
-                                '\n' +
-                                warning_msg)
+                                f'Sono stati convertiti {files_n - missing_sheet} file Excel.\n'
+                                f'I file csv sono stati salvati nella cartella {path_csv}.\n'
+                                f'\n'
+                                f'{warning_msg}')
 
                 # no folder selected, exiting the script
                 else:
@@ -133,12 +157,10 @@ def main():
                                 'Nessuna cartella selezionata.\n'
                                 'Chiusura dell\'applicazione')
 
-
         else:
             # no Excel file found
             mb.showinfo('File Excel non trovati',
                         'Nessun file Excel nella cartella selezionata.')
-
 
     else:
         # no folder selected, exiting the script
