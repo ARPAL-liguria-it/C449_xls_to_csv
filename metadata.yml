@@ -1,0 +1,8 @@
+Version: 1.0.0
+CompanyName: ARPAL
+FileDescription: Conversion of selected areas of Excel files to csv files
+InternalName: CSV mi piaci tu
+OriginalFilename: csv_mi_piaci_tu.exe
+ProductName: CSV mi piaci tu
+
+# create-version-file .\metadata.yml --outfile file_version_info.txt
