@@ -1,7 +1,6 @@
 from os import listdir
 import re
 import csv
-import pyi_splash
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 import pandas as pd
