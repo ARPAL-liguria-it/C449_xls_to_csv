@@ -4,5 +4,10 @@ FileDescription: Conversion of selected areas of Excel files to csv files
 InternalName: CSV mi piaci tu
 OriginalFilename: csv_mi_piaci_tu.exe
 ProductName: CSV mi piaci tu
+Translation:
+  - langID: 0x0410
+    charsetID: 1200
+  - langID: 1033
+    charsetID: 1252
 
 # create-version-file .\metadata.yml --outfile file_version_info.txt
