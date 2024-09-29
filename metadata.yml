@@ -10,4 +10,5 @@ Translation:
   - langID: 1033
     charsetID: 1252
 
+# to be executed to update the version and other app details:
 # create-version-file .\metadata.yml --outfile file_version_info.txt
