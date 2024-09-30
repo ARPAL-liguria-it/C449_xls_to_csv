@@ -76,6 +76,8 @@ jobs:
           name: 'CSVMipiaciTu'
           path: ${{ github.workspace }}/mydist
           compression-level: 6
+
+      - name: debug
         run: |
           echo ${{ github.workspace }}
 
