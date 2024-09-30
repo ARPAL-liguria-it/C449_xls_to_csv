@@ -31,14 +31,14 @@ VSVersionInfo(
       StringTable(
         u'040904B0',
         [StringStruct(u'CompanyName', u'ARPAL'),
-        StringStruct(u'FileDescription', u'Conversion of selected areas of Excel files to csv files'),
+        StringStruct(u'FileDescription', u'Conversion to csv files of cell area from A103 to B157 of Excel files'),
         StringStruct(u'FileVersion', u'1.0.0.0'),
-        StringStruct(u'InternalName', u'CSV mi piaci tu'),
+        StringStruct(u'InternalName', u'CSVMiPiaciTu'),
         StringStruct(u'LegalCopyright', u''),
-        StringStruct(u'OriginalFilename', u'csv_mi_piaci_tu.exe'),
-        StringStruct(u'ProductName', u'CSV mi piaci tu'),
+        StringStruct(u'OriginalFilename', u'CSVMiPiaciTu.exe'),
+        StringStruct(u'ProductName', u'CSVMiPiaciTu'),
         StringStruct(u'ProductVersion', u'1.0.0.0')])
       ]), 
-    VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
+    VarFileInfo([VarStruct(u'Translation', [1040, 1200, 1033, 1252])])
   ]
 )

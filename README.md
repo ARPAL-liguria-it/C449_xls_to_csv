@@ -1,6 +1,6 @@
 # Conversion of predefined Excel reports to csv files for method C449
 
-The application converts a portion of predefined Excel files 
+The application converts the cell area from A103 to B157 of Excel files 
 to csv files.
 
 The user must specify a folder in which the reports are stored 

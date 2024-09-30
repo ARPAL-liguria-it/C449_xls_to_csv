@@ -1,9 +1,9 @@
 Version: 1.0.0
 CompanyName: ARPAL
-FileDescription: Conversion of selected areas of Excel files to csv files
-InternalName: CSV mi piaci tu
-OriginalFilename: csv_mi_piaci_tu.exe
-ProductName: CSV mi piaci tu
+FileDescription: Conversion to csv files of cell area from A103 to B157 of Excel files
+InternalName: CSVMiPiaciTu
+OriginalFilename: CSVMiPiaciTu.exe
+ProductName: CSVMiPiaciTu
 Translation:
   - langID: 1040
     charsetID: 1200
