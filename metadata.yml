@@ -1,6 +1,6 @@
 Version: 1.0.0
 CompanyName: ARPAL
-FileDescription: Conversion to csv files of cell area from A103 to B157 of Excel files
+FileDescription: Conversion to csv file of Excel file area from cell A103 to B157
 InternalName: CSVMiPiaciTu
 OriginalFilename: CSVMiPiaciTu.exe
 ProductName: CSVMiPiaciTu
