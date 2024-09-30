@@ -48,7 +48,6 @@ jobs:
     runs-on: [ windows-latest ]
 
     steps:
-    - uses: actions/checkout@v4
     - name: Update metadata for Pyinstaller
       run: |
         pip install pyinstaller-versionfile
@@ -60,8 +59,6 @@ jobs:
     runs-on: [ windows-latest ]
 
     steps:
-      - uses: actions/checkout@v4
-
       - name: install Pyinstaller
         run: |
           pip install pyinstaller==6.10.0
@@ -75,7 +72,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'CSVMipiaciTu'
-          path: './mydist'
+          path: './mydist/CSVMiPiaciTu.exe'
           compression-level: 6
 
       - name: If executable upload success
