@@ -73,8 +73,7 @@ jobs:
             --onefile \
             --windowed \
             --version-file=file_version_info.txt \
-            --name 'CSVMiPiaciTu' \
-            .\converter\converter.py
+            --name 'CSVMiPiaciTu' ./converter/converter.py
 
       - name: upload the exe file
         id: artifact_upload
