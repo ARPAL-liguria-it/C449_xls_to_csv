@@ -74,14 +74,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'CSVMipiaciTu'
-          path: '/mydist/CSVMiPiaciTu.exe'
+          path: ${{ github.workspace }}/mydist
           compression-level: 6
+        run: |
+          echo ${{ github.workspace }}
 
       - name: If executable upload success
         id: exe_uploading
         if: steps.artifact_upload.conclusion == 'success'
         run: |
-          echo "✔️ Executable **_(${{ inputs.upload_exe_with_name }})_** uploaded successfully" >> $GITHUB_STEP_SUMMARY
+          echo "✔️ Executable uploaded successfully" >> $GITHUB_STEP_SUMMARY
           echo "uploaded='true'" >> $GITHUB_OUTPUT
 
       - name: If executable upload fails
