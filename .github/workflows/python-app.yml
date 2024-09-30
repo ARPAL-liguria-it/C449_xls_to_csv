@@ -75,7 +75,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'CSVMipiaciTu'
-          path: './dist'
+          path: './mydist'
           compression-level: 6
 
       - name: If executable upload success
