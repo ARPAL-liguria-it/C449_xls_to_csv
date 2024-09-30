@@ -74,12 +74,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'CSVMipiaciTu'
-          path: ${{ github.workspace }}/mydist
+          path: ${{ github.workspace }}\mydist
           compression-level: 6
 
       - name: debug
         run: |
-          echo ${{ github.workspace }}
+          echo ls ${{ github.workspace }}
 
       - name: If executable upload success
         id: exe_uploading
