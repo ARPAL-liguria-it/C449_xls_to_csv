@@ -42,30 +42,28 @@ jobs:
       run: |
         python -m unittest
 
-  metadata:
-    needs: build
-
-    runs-on: [ windows-latest ]
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Update metadata for Pyinstaller
-      run: |
-        pip install pyinstaller-versionfile
-        create-version-file .\metadata.yml --outfile file_version_info.txt
-
   makeexe:
-    needs: metadata
-
+    needs: build
     runs-on: [ windows-latest ]
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.12"
+
       - name: install Pyinstaller
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller==6.10.0
+
+      - name: Update metadata for Pyinstaller
+        run: |
+          pip install pyinstaller-versionfile
+          create-version-file .\metadata.yml --outfile file_version_info.txt
 
       - name: make the exe file
         shell: bash
