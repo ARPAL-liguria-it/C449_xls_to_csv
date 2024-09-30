@@ -31,7 +31,7 @@ VSVersionInfo(
       StringTable(
         u'040904B0',
         [StringStruct(u'CompanyName', u'ARPAL'),
-        StringStruct(u'FileDescription', u'Conversion to csv files of cell area from A103 to B157 of Excel files'),
+        StringStruct(u'FileDescription', u'Conversion to csv file of Excel file area from cell A103 to B157'),
         StringStruct(u'FileVersion', u'1.0.0.0'),
         StringStruct(u'InternalName', u'CSVMiPiaciTu'),
         StringStruct(u'LegalCopyright', u''),
