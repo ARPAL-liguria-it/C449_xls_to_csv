@@ -66,20 +66,24 @@ jobs:
           pip install pyinstaller==6.10.0
 
       - name: make the exe file
+        shell: bash
         run: |
-          pyinstaller --clean --onefile --windowed --version-file=file_version_info.txt --name 'CSVMiPiaciTu' .\converter\converter.py
+          pyinstaller \
+            --clean \
+            --onefile \
+            --windowed \
+            --version-file=file_version_info.txt \
+            --name 'CSVMiPiaciTu' 
+            .\converter\converter.py
 
       - name: upload the exe file
         id: artifact_upload
         uses: actions/upload-artifact@v4
         with:
-          name: 'CSVMipiaciTu'
-          path: ${{ github.workspace }}\mydist
+          name: 'CSVMiPiaciTu'
+          path: .\dist\CSVMiPiaciTu.exe
           compression-level: 6
-
-      - name: debug
-        run: |
-          echo ls ${{ github.workspace }}
+          overwrite: true
 
       - name: If executable upload success
         id: exe_uploading
