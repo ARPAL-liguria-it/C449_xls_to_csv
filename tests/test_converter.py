@@ -1,19 +1,18 @@
 import unittest
-import unittest.mock as mock
-from converter import converter
+from unittest.mock import patch as patch
 import pandas as pd
-
+from converter import converter
 
 class TestConvertCsv(unittest.TestCase):
     def setUp(self):
         self.dir = './data'
         self.filename = './data/foglio_calcolo_diluizioni.xlsx'
-        self.data = data = converter.read_content(self.filename,
-                                      sheet='perCalcoliDiluizione',
-                                      start_row=102,
-                                      end_row=158,
-                                      start_column='A',
-                                      end_column='B')
+        self.data = converter.read_content(self.filename,
+                                           sheet='perCalcoliDiluizione',
+                                           start_row=102,
+                                           end_row=158,
+                                           start_column='A',
+                                           end_column='B')
         self.badnames = ['Cus ter145à-!.csv', 'S--_à3.txt', '12Dfg_-ò.xlsx']
 
     def tearDown(self):
@@ -47,7 +46,7 @@ class TestConvertCsv(unittest.TestCase):
 
     def test_converter_call(self):
         """Testing the call to the csv converter"""
-        with mock.patch.object(self.data, 'to_csv') as to_csv_mock:
+        with patch.object(self.data, 'to_csv') as to_csv_mock:
             converter.convert_to_csv(self.data, 'test.csv')
             to_csv_mock.assert_called_with('test.csv',
                                            header=False,
