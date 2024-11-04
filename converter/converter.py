@@ -14,7 +14,8 @@ def list_xls(dirpath):
         filenames of xls and xlsx files within the specified directory.
     """
     files = listdir(dirpath)
-    files_xls = [i for i in files if (i.endswith('.xls') or i.endswith('.xlsx'))]
+    # find xls files and avoid hidden files
+    files_xls = [i for i in files if (i.endswith('.xls') or i.endswith('.xlsx') and not i.startswith('.'))]
 
     return files_xls
 
