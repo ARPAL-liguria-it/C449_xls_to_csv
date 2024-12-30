@@ -4,6 +4,7 @@ import csv
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 import pandas as pd
+from sigfig import round as sround
 
 def list_xls(dirpath):
     """
@@ -81,6 +82,23 @@ def clean_names(filenames):
 
     return cleaned_names
 
+def to_sigfig(data, column, sigfig):
+    """
+    A function for formatting numbers in a column of a Pandas data.frame
+    with the desired number of significant digits
+    :param data: DataFrame
+        a pandas DataFrame with named columns.
+    :param column: int
+        the number of the column containing the values to be formatted.
+    :param sigfig: int
+        the number of the desired significant figures.
+    :return: DataFrame
+        a pandas DataFrame.
+    """
+    myrows = list(range(3, 47)) + list(range(48, 55))
+    data.iloc[myrows, column] = data.iloc[myrows, column].apply(lambda x: sround(x, sigfig))
+
+    return data
 
 
 def main():
@@ -129,6 +147,10 @@ def main():
                                         end_row=158,
                                         start_column='A',
                                         end_column='B')
+
+                            # format the numbers with the required significant figures
+                            to_sigfig(content_csv, column=1, sigfig=2)
+                            print(content_csv)
 
                             # convert the content to a csv file
                             convert_to_csv(content_csv,
