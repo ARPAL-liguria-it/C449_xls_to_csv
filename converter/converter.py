@@ -4,7 +4,7 @@ import csv
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 import pandas as pd
-from sigfig import round as sround
+from decimal import Decimal, getcontext
 
 def list_xls(dirpath):
     """
@@ -82,12 +82,67 @@ def clean_names(filenames):
 
     return cleaned_names
 
-def to_sigfig(data, column, sigfig):
+def round_to_sig_figs(x, sigfigs):
+    """
+    Round a number off to a given number of significant figures.
+    from https://rowannicholls.github.io/python/data/rounding_off.html
+    :param x: float
+        value to be converted
+    :param sigfigs: int
+        number of desired significant figures
+    """
+    # A special case is if the number is 0
+    if float(x) == 0.0:
+        output = '0' * sigfigs
+        # Insert a decimal point
+        output = output[0] + '.' + output[1:]
+
+        return output
+
+    # A special case is if the number is 'nan'
+    if pd.isna(x):
+
+        return 'None'
+
+    # Set the precision
+    getcontext().prec = sigfigs
+    rounded = Decimal(x)
+    # The precision only kicks in when an arithmetic operation is performed
+    rounded = rounded * 1
+    # Remove scientific notation
+    # (if the order of magnitude of the number is larger than the number of
+    # significant figures, the number will have been converted to scientific
+    # notation)
+    rounded = float(rounded)
+    # Convert to string
+    output = str(rounded)
+
+    # Count the number of significant figures
+    sigfigs_now = len(output.replace('-', '').replace('.', '').lstrip('0'))
+
+    # Remove trailing zero if one exists and it is not necessary
+    if (sigfigs_now > sigfigs) and (output.endswith('.0')):
+        output = output.removesuffix('.0')
+
+    # Add trailing zeroes if necessary
+    if sigfigs_now < sigfigs:
+        discrepancy = sigfigs - sigfigs_now
+        # Append a decimal point if necessary
+        if '.' not in output:
+            output = output + '.'
+        # Add trailing zeroes
+        output = output + '0' * discrepancy
+
+    return output
+
+def apply_sigfig(data, rows, column, sigfig):
     """
     A function for formatting numbers in a column of a Pandas data.frame
     with the desired number of significant digits
     :param data: DataFrame
         a pandas DataFrame with named columns.
+    :param rows: list
+        the row indexes with the numbers to be converted.
     :param column: int
         the number of the column containing the values to be formatted.
     :param sigfig: int
@@ -95,8 +150,7 @@ def to_sigfig(data, column, sigfig):
     :return: DataFrame
         a pandas DataFrame.
     """
-    myrows = list(range(3, 47)) + list(range(48, 55))
-    data.iloc[myrows, column] = data.iloc[myrows, column].apply(lambda x: sround(x, sigfig))
+    data.iloc[rows, column] = data.iloc[rows, column].apply(lambda x: round_to_sig_figs(x, sigfig))
 
     return data
 
@@ -110,6 +164,12 @@ def main():
 
     # sheet name to be found in the Excel files
     mysheet = 'perCalcoliDiluizione'
+    # rows id with numeric values to be rounded
+    num_rows = list(range(3, 47)) + list(range(48, 55))
+    # column id with numeric values to be rounded
+    num_col = 1
+    # number of significant digits required for rounding
+    required_sigfig = 2
 
     # select the folder
     path_xls = fd.askdirectory(title="Seleziona la cartella contenente i file Excel da convertire",
@@ -149,8 +209,10 @@ def main():
                                         end_column='B')
 
                             # format the numbers with the required significant figures
-                            to_sigfig(content_csv, column=1, sigfig=2)
-                            print(content_csv)
+                            apply_sigfig(content_csv,
+                                         rows = num_rows,
+                                         column = num_col,
+                                         sigfig = required_sigfig)
 
                             # convert the content to a csv file
                             convert_to_csv(content_csv,

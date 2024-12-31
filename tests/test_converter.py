@@ -3,6 +3,7 @@ from unittest.mock import patch as patch
 import pandas as pd
 from converter import converter
 
+
 class TestConvertCsv(unittest.TestCase):
     def setUp(self):
         self.dir = './data'
@@ -14,12 +15,18 @@ class TestConvertCsv(unittest.TestCase):
                                            start_column='A',
                                            end_column='B')
         self.badnames = ['Cus ter145à-!.csv', 'S--_à3.txt', '12Dfg_-ò.xlsx']
+        self.num_rows = list(range(3, 47)) + list(range(48, 55))
+        self.num_col = 1
+        self.required_sigfig = 2
 
     def tearDown(self):
         del self.dir
         del self.filename
         del self.data
         del self.badnames
+        del self.num_rows
+        del self.num_col
+        del self.required_sigfig
 
     def test_listxls(self):
         self.assertEqual(len(converter.list_xls(self.dir)), 1)
@@ -43,6 +50,19 @@ class TestConvertCsv(unittest.TestCase):
     def test_clean_names(self):
         """Testing the substitution of non-alphanumerical characters from filenames"""
         self.assertEqual(converter.clean_names(self.badnames), ['Custer145', 'S_3', '12Dfg_'])
+
+    def test_round_to_sig_figs(self):
+        """Testing rounding to a specified number of significant figures"""
+        self.assertEqual(converter.round_to_sig_figs(0.00054343, 2), '0.00054')
+        self.assertEqual(converter.round_to_sig_figs(0.0054343, 2), '0.0054')
+        self.assertEqual(converter.round_to_sig_figs(0.054343, 2), '0.054')
+        self.assertEqual(converter.round_to_sig_figs(0.54343, 2), '0.54')
+        self.assertEqual(converter.round_to_sig_figs(5.4343, 2), '5.4')
+        self.assertEqual(converter.round_to_sig_figs(54.343, 2), '54')
+        self.assertEqual(converter.round_to_sig_figs(543.43, 2), '540')
+        self.assertEqual(converter.round_to_sig_figs(5434.3, 2), '5400')
+        self.assertEqual(converter.round_to_sig_figs(0.01, 2), '0.010')
+        self.assertEqual(converter.round_to_sig_figs(0.01000, 2), '0.010')
 
     def test_converter_call(self):
         """Testing the call to the csv converter"""

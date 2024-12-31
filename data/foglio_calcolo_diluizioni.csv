@@ -1,4 +1,4 @@
-"Codice campione";""
+"Codice campione";"1234-017/24"
 "";""
 "Analita";"Risultato da consegnare (µg/l)"
 "Clorometano";""
@@ -11,7 +11,7 @@
 "1,1-Dicloroetano";""
 "Etil t-butil etere (ETBE)";""
 "cis - 1,2-Dicloroetilene";""
-"Triclorometano (Cloroformio)";10.823726157402492
+"Triclorometano (Cloroformio)";11
 "1,1,1-Tricloroetano";""
 "Tetracloruro di carbonio";""
 "Benzene";""
@@ -19,13 +19,13 @@
 "Tert amil metil etere (TAME)";""
 "Tricloroetilene";""
 "1,2-Dicloropropano";""
-"Bromodiclorometano";2.512651149725705
+"Bromodiclorometano";2.5
 "trans-1,3-Dicloropropene";""
 "Toluene";""
 "cis-1,3-dicloropropene";""
 "Tetracloroetilene";""
 "1,1,2-Tricloroetano";""
-"Dibromoclorometano";0.4473551767085837
+"Dibromoclorometano";0.45
 "1,2-Dibromoetano";""
 "Clorobenzene";""
 "Etilbenzene";""
@@ -33,7 +33,7 @@
 "1-Bromo-3-cloropropano";""
 "o-Xilene";""
 "Stirene";""
-"Tribromometano (Bromoformio)";0.0149
+"Tribromometano (Bromoformio)";0.015
 "Isopropilbenzene (Cumene)";""
 "1,2,3-Tricloropropano";""
 "1,1,2,2-Tetracloroetano";""
@@ -47,9 +47,9 @@
 "1,2,3-Triclorobenzene";""
 "";""
 "Sommatoria (cis 1,2-Dicloroetilene + trans 1,2-Dicloroetilene)";0.0011
-"Sommatoria organoalogenati";10.823726157402492
-"Sommatoria organoalogenati cancerogeni";2.9749063264342888
+"Sommatoria organoalogenati";11
+"Sommatoria organoalogenati cancerogeni";3.0
 "Sommatoria solv. organ. clorurati";""
 "Sommatoria solventi organici aromatici";""
 "Sommatoria (Tetracloroetilene + Tricloroetilene)";""
-"Trialometani totali";13.798632483836782
+"Trialometani totali";14

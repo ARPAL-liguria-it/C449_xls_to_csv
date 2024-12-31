@@ -10,6 +10,7 @@ The Excel files must have a sheet exactly named
 "_perCalcoliDiluizione_", and only the portion of that sheet
 in columns A:B and rows 103:157 will be converted to csv.
 
-The output csv file will have semicolon (;) as field separator, dot (.)
+The output csv file has semicolon (;) as field separator, dot (.)
 as decimal separator and strings, even the empty ones, quoted within double
-marks (").
+marks ("). Numbers are reported as quoted strings, due to rounding to 2
+significant figures.
