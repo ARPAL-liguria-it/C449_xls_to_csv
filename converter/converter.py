@@ -102,7 +102,7 @@ def round_to_sig_figs(x, sigfigs):
     # A special case is if the number is 'nan'
     if pd.isna(x):
 
-        return 'None'
+        return ''
 
     # Set the precision
     getcontext().prec = sigfigs
